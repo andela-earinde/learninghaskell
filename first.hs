@@ -19,6 +19,10 @@ head' :: [a] -> a
 head' [] = error "Can't call head on an empty list"
 head' (x:_) = x
 
+head1' :: [a] -> a
+head1' xs = case xs of [] -> error "No head for empty list"
+                       (x:_) -> x
+
 length' :: (Integral b) => [a] -> b
 length' list = sum [1 | _ <- list]
 
@@ -32,3 +36,12 @@ bmiTell bmi
     | bmi <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"
     | bmi <= 30.0 = "You're fat! Lose some weight, fatty!"
     | otherwise   = "You're a whale, congratulations!"
+
+initials :: String -> String -> String
+initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
+    where (f:_) = firstname
+          (l:_) = lastname
+
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]
+calcBmis xs = [bmi x y | (x, y) <- xs]
+    where bmi weight height = (weight / height) ^ 2
