@@ -37,6 +37,7 @@ bmiTell bmi
     | bmi <= 30.0 = "You're fat! Lose some weight, fatty!"
     | otherwise   = "You're a whale, congratulations!"
 
+-- where bindings
 initials :: String -> String -> String
 initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
     where (f:_) = firstname
@@ -45,3 +46,19 @@ initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
 calcBmis :: (RealFloat a) => [(a, a)] -> [a]
 calcBmis xs = [bmi x y | (x, y) <- xs]
     where bmi weight height = (weight / height) ^ 2
+
+-- let bindings : let <bindings> in <expression>
+cylinder :: (RealFloat a) => a -> a -> a
+cylinder r h =
+    let sideArea = 2 * pi * r * h
+        topArea = pi * r ^2
+    in  sideArea + 2 * topArea
+
+{-
+case expression of pattern -> result
+                   pattern -> result
+                   pattern -> result
+-}
+head2 :: [a] -> a
+head2 xs = case xs of [] -> error "The array is empty"
+                      (x:_) -> x
