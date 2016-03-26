@@ -26,3 +26,18 @@ take' _ [] = []
 take' i (x:xs)
     | i < 1 = []
     | otherwise = x:take' (i-1) xs
+
+reverse' :: (Ord a) => [a] -> [a]
+reverse' [] = []
+reverse' (x:xs) = reverse' xs ++ [x]
+
+zip' :: [a] -> [b] -> [(a, b)]
+zip' [] _ = []
+zip' _ [] = []
+zip' (x:xs) (y:ys) = (x,y):zip' xs ys
+
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' _ [] = False
+elem' a (x:xs)
+    | a == x = True
+    | otherwise = a `elem'` xs
